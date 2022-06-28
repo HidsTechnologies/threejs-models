@@ -211,9 +211,10 @@ function clearText() {
 const speaker = document.getElementById("speaker");
 speaker.addEventListener("click", () => {
   let text = {
-    en: "",
-    hn: "",
-    marathi: "",
+    en: "The accumulator module takes up a certain volume of pressurized liquid and releases it again if required. •	The accumulator shut-off block with pressure relief valve and manometer serves the manual limitation, blocking and unloading of the diaphragm-type accumulator. Connections via self-sealing coupling plugs.",
+    hn: "संचायक मॉड्यूल दबाव वाले तरल की एक निश्चित मात्रा लेता है और यदि आवश्यक हो तो इसे फिर से छोड़ देता है। • दबाव राहत वाल्व और मैनोमीटर के साथ संचायक शट-ऑफ ब्लॉक, डायाफ्राम-प्रकार के संचायक के मैनुअल सीमा, अवरुद्ध और उतारने का कार्य करता है। सेल्फ-सीलिंग कपलिंग प्लग के माध्यम से कनेक्शन।",
+    marathi:
+      "एक्यूम्युलेटर मॉड्युल दबावयुक्त द्रवाचा ठराविक खंड घेते आणि आवश्यक असल्यास ते पुन्हा सोडते. • प्रेशर रिलीफ व्हॉल्व्ह आणि मॅनोमीटरसह संचयक शट-ऑफ ब्लॉक डायफ्राम-प्रकार संचयक मॅन्युअल मर्यादा, ब्लॉकिंग आणि अनलोडिंगसाठी कार्य करते. सेल्फ-सीलिंग कपलिंग प्लगद्वारे कनेक्शन.",
   };
   handleAudio("12", text);
 });

@@ -211,9 +211,10 @@ function clearText() {
 const speaker = document.getElementById("speaker");
 speaker.addEventListener("click", () => {
   let text = {
-    en: "",
-    hn: "",
-    marathi: "",
+    en: " Directional control spool valve; 4 connections; 3 switching positions; electrical operation; spring centering; concealed auxiliary control; control spool directly operated; control spool type 'G'; state of rest, P-T open, A-B blocked; mounted on component plate; Connections via self-sealing coupling plugs",
+    hn: "दिशात्मक नियंत्रण स्पूल वाल्व; 4 कनेक्शन; 3 स्विचिंग पोजीशन; विद्युत संचालन; वसंत केंद्रित; छुपा सहायक नियंत्रण; नियंत्रण स्पूल सीधे संचालित; नियंत्रण स्पूल प्रकार 'जी'; आराम की स्थिति, पीटी खुला, ए-बी अवरुद्ध; घटक प्लेट पर घुड़सवार; सेल्फ-सीलिंग कपलिंग प्लग के माध्यम से कनेक्शन।",
+    marathi:
+      "दिशात्मक नियंत्रण स्पूल वाल्व; 4 कनेक्शन; 3 स्विचिंग पोझिशन्स; इलेक्ट्रिकल ऑपरेशन; वसंत मध्यभागी; गुप्त सहाय्यक नियंत्रण; नियंत्रण स्पूल थेट ऑपरेट; नियंत्रण स्पूल प्रकार 'जी'; विश्रांतीची स्थिती, पी-टी उघडा, ए-बी अवरोधित; घटक प्लेटवर आरोहित; सेल्फ-सीलिंग कपलिंग प्लगद्वारे कनेक्शन.",
   };
   handleAudio("09", text);
 });

@@ -13,6 +13,33 @@ languageSelect.addEventListener("change", (event) => {
 });
 
 /**
+ * Loaders
+ */
+const loadingBarElement = document.querySelector(".loading-bar");
+
+const loadingManager = new THREE.LoadingManager(
+  // Loaded
+  () => {
+    // Wait a little
+    window.setTimeout(() => {
+      // Animate overlay
+      console.log("EXECUTED");
+      // Update loadingBarElement
+      loadingBarElement.classList.add("ended");
+      loadingBarElement.style.transform = "";
+    }, 500);
+  },
+
+  // Progress
+  (itemUrl, itemsLoaded, itemsTotal) => {
+    // Calculate the progress and update the loadingBarElement
+    const progressRatio = itemsLoaded / itemsTotal;
+    loadingBarElement.style.transform = `scaleX(${progressRatio})`;
+    console.log(progressRatio);
+  }
+);
+
+/**
  * Base
  */
 // Debug
@@ -94,7 +121,7 @@ const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath("../draco/");
 
 // GLTF loader
-const gltfLoader = new GLTFLoader();
+const gltfLoader = new GLTFLoader(loadingManager);
 gltfLoader.setDRACOLoader(dracoLoader);
 
 /**

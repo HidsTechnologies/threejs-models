@@ -211,9 +211,10 @@ function clearText() {
 const speaker = document.getElementById("speaker");
 speaker.addEventListener("click", () => {
   let text = {
-    en: "",
-    hn: "",
-    marathi: "",
+    en: "External gear motors are displacement machines in which the displacement chambers are made up of gears with external gearing. High and low-pressure range are separated by the contact of the meshing gears. The motor is suitable for both clockwise and anticlockwise rotation.",
+    hn: "बाहरी गियर मोटर्स विस्थापन मशीन हैं जिसमें विस्थापन कक्ष बाहरी गियरिंग वाले गियर से बने होते हैं। मेशिंग गियर्स के संपर्क द्वारा उच्च और निम्न-दबाव रेंज को अलग किया जाता है। मोटर दक्षिणावर्त और वामावर्त रोटेशन दोनों के लिए उपयुक्त है।",
+    marathi:
+      "बाह्य गीअर मोटर ही विस्थापन यंत्रे आहेत ज्यात विस्थापन कक्ष बाह्य गियरिंगसह गीअर्सने बनलेले असतात. उच्च आणि कमी-दाब श्रेणी मेशिंग गीअर्सच्या संपर्काद्वारे विभक्त केली जाते. मोटर घड्याळाच्या दिशेने आणि विरुद्ध दिशेने फिरण्यासाठी दोन्ही योग्य आहे.",
   };
   handleAudio("17", text);
 });
