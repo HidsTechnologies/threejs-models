@@ -148,7 +148,7 @@ scene.add(light4);
 /**
  * Model
  */
-gltfLoader.load("./assets/07.glb", (gltf) => {
+gltfLoader.load("./assets/01.glb", (gltf) => {
   scene.add(gltf.scene);
 
   // Get each object
