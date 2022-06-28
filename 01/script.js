@@ -171,51 +171,41 @@ gltfLoader.load("./assets/01.glb", (gltf) => {
     (child) => child.name === "Rod_Seals"
   );
 
-  console.log(gltf.scene, "-------------------------------------------");
-  console.log(
-    Retract_Flow_Port_Mesh,
-    "*************************",
-    Extend_Flow_Port_Mesh,
-    "*************************",
-    Piston_Rod_Mesh,
-    "*************************",
-    Rod_Seals_Mesh
-  );
   // Apply materials
-  // Retract_Flow_Port_Mesh.material = basicMaterial;
-  // Extend_Flow_Port_Mesh.material = basicMaterial;
-  // Piston_Rod_Mesh.material = basicMaterial;
-  // Rod_Seals_Mesh.material = basicMaterial;
-
-  // bakedMesh.material = bakedMaterial;
-  // portalLightMesh.material = portalLightMaterial;
-  // poleLightAMesh.material = poleLightMaterial;
-  // poleLightBMesh.material = poleLightMaterial;
 
   // MESH - mapping
   const MESH_DATA = [
     // {
-    //   mesh: portalLightMesh,
-    //   name: "portalLight",
-    //   audio: "portal",
+    //   mesh: Retract_Flow_Port_Mesh,
+    //   name: "Retract_Flow_Port",
+    //   audio: "Retract_Flow_Port",
     //   text: {
     //     en: "This portal is entrance to the multiverse",
     //     hn: "यह पोर्टल मल्टीवर्स का प्रवेश द्वार है",
     //   },
     // },
     // {
-    //   mesh: poleLightAMesh,
-    //   name: "poleLightA",
-    //   audio: "leftLamp",
+    //   mesh: Extend_Flow_Port_Mesh,
+    //   name: "Extend_Flow_Port",
+    //   audio: "Extend_Flow_Port",
     //   text: {
     //     en: "I am the Street Lamp at the left ",
     //     hn: "मैं बाईं ओर का  स्ट्रीट लैंप हूं",
     //   },
     // },
     // {
-    //   mesh: poleLightBMesh,
-    //   name: "poleLightB",
-    //   audio: "rightLamp",
+    //   mesh: Piston_Rod_Mesh,
+    //   name: "Piston_Rod",
+    //   audio: "Piston_Rodmp",
+    //   text: {
+    //     en: "I am the Street Lamp at the right ",
+    //     hn: "मैं दायीं ओर का स्ट्रीट लैंप हूं",
+    //   },
+    // },
+    // {
+    //   mesh: Rod_Seals_Mesh,
+    //   name: "Rod_Seals",
+    //   audio: "Rod_Sealsamp",
     //   text: {
     //     en: "I am the Street Lamp at the right ",
     //     hn: "मैं दायीं ओर का स्ट्रीट लैंप हूं",
@@ -240,34 +230,46 @@ function clickMesh({ mesh, name, audio, text }) {
     clickedItem = name;
     // mesh.material = new THREE.MeshBasicMaterial({ color: 0xff00ff });
     // load a sound and set it as the Audio object's buffer
-    audioLoader.load(
-      `assets/${audio}-${selectedLang}.ogg`,
-      function (buffer) {
-        console.log(buffer);
-        textHelper.textContent = text[selectedLang];
-        textHelper.style.display = "block";
-        sound.setBuffer(buffer);
-        sound.setLoop(false);
-        sound.setVolume(0.5);
-        sound.play();
-        let delay = buffer.duration * 1000;
-        console.log("delay");
-        console.log(delay);
-        setTimeout(() => {
-          //   reset scale
-          //   mesh.scale.set(1, 1, 1);
-          clearText();
-        }, delay);
-      },
-      (xhr) => console.log(xhr),
-      (err) => console.log(err)
-    );
+    handleAudio(audio, text);
   });
 }
 
-function clearText() {
-  textHelper.style.display = "none";
+function handleAudio(audio, text) {
+  audioLoader.load(
+    `assets/${audio}-${selectedLang}.ogg`,
+    function (buffer) {
+      console.log(buffer);
+      textHelper.textContent = text[selectedLang];
+      textHelper.style.display = "block";
+      sound.setBuffer(buffer);
+      sound.setLoop(false);
+      sound.setVolume(0.5);
+      sound.play();
+      let delay = buffer.duration * 1000;
+      setTimeout(() => {
+        clearText();
+      }, delay);
+    },
+    (xhr) => console.log(xhr),
+    (err) => console.log(err)
+  );
 }
+
+function clearText() {
+  // textHelper.style.display = "none";
+}
+
+// SPEAKER
+const speaker = document.getElementById("speaker");
+speaker.addEventListener("click", () => {
+  let text = {
+    en: "Hydraulic Double Acting Cylinders are intended to manage flow or load in both side of piston, through whichcylinder is extended or retracted. Connecting ports (typically called A & B) are situated on either side of piston to received input oil flow & discharge return flow from cylinder. ",
+    hn: "हाइड्रोलिक डबल अभिनय सिलेंडर प्रवाह या भार का प्रबंधन करने के लिए पिस्टन के दोनों ओर होते हैं, जिसके माध्यम से सिलेंडर उठाया या वापस ले लिया है। कनेक्टिंग पोर्ट (आमतौर पर ए और बी कहा जाता है) पिस्टन के दोनों ओर स्थित होते हैं सिलेंडर से इनपुट ऑयल फ्लो और डिस्चार्ज रिटर्न फ्लो प्राप्त करने के लिए।",
+    marathi:
+      "हायड्रॉलिक डबल-अॅक्टिंग सिलिंडर पिस्टनच्या दोन्ही बाजूला प्रवाह किंवा भार व्यवस्थापित करण्यासाठी असतात, ज्याद्वारे सिलेंडर वर केले जाते किंवा मागे घेतले जाते. कनेक्टिंग पोर्ट्स (सामान्यतः A आणि B म्हणतात) पिस्टनच्या दोन्ही बाजूला स्थित आहेत सिलेंडरमधून इनपुट ऑइल फ्लो आणि डिस्चार्ज रिटर्न फ्लो प्राप्त करण्यासाठी.",
+  };
+  handleAudio("01", text);
+});
 
 /**
  * Animate
