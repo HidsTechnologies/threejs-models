@@ -177,33 +177,47 @@ function clickMesh({ mesh, name, audio, text }) {
     }
     clickedItem = name;
     // load a sound and set it as the Audio object's buffer
-    audioLoader.load(
-      `assets/${audio}-${selectedLang}.ogg`,
-      function (buffer) {
-        console.log(buffer);
-        textHelper.textContent = text[selectedLang];
-        textHelper.style.display = "block";
-        sound.setBuffer(buffer);
-        sound.setLoop(false);
-        sound.setVolume(0.5);
-        sound.play();
-        let delay = buffer.duration * 1000;
-        console.log("delay");
-        console.log(delay);
-        setTimeout(() => {
-          clearText();
-        }, delay);
-      },
-      (xhr) => console.log(xhr),
-      (err) => console.log(err)
-    );
+    handleAudio(audio, text);
   });
+}
+function handleAudio(audio, text) {
+  audioLoader.load(
+    `assets/${audio}-${selectedLang}.ogg`,
+    function (buffer) {
+      console.log(buffer);
+      textHelper.textContent = text[selectedLang];
+      textHelper.style.display = "block";
+      sound.setBuffer(buffer);
+      sound.setLoop(false);
+      sound.setVolume(0.5);
+      sound.play();
+      let delay = buffer.duration * 1000;
+      console.log("delay");
+      console.log(delay);
+      setTimeout(() => {
+        clearText();
+      }, delay);
+    },
+    (xhr) => console.log(xhr),
+    (err) => console.log(err)
+  );
 }
 
 function clearText() {
   textHelper.style.display = "none";
 }
 
+// SPEAKER
+const speaker = document.getElementById("speaker");
+speaker.addEventListener("click", () => {
+  let text = {
+    en: "Directional control spool valve; 4 connections; 2 switching positions; manual operation by means of lever; spring return.",
+    hn: "दिशात्मक नियंत्रण स्पूल वाल्व; 4 कनेक्शन; 2 स्विचिंग स्थिति; लीवर के माध्यम से मैनुअल ऑपरेशन; वसंत वापसी",
+    marathi:
+      "दिशात्मक नियंत्रण स्पूल वाल्व; 4 कनेक्शन; 2 स्विचिंग पोझिशन्स; लीव्हरद्वारे मॅन्युअल ऑपरेशन; वसंत ऋतु परतावा.",
+  };
+  handleAudio("06", text);
+});
 /**
  * Animate
  */

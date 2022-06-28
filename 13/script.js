@@ -177,33 +177,46 @@ function clickMesh({ mesh, name, audio, text }) {
     }
     clickedItem = name;
     // load a sound and set it as the Audio object's buffer
-    audioLoader.load(
-      `assets/${audio}-${selectedLang}.ogg`,
-      function (buffer) {
-        console.log(buffer);
-        textHelper.textContent = text[selectedLang];
-        textHelper.style.display = "block";
-        sound.setBuffer(buffer);
-        sound.setLoop(false);
-        sound.setVolume(0.5);
-        sound.play();
-        let delay = buffer.duration * 1000;
-        console.log("delay");
-        console.log(delay);
-        setTimeout(() => {
-          clearText();
-        }, delay);
-      },
-      (xhr) => console.log(xhr),
-      (err) => console.log(err)
-    );
+    handleAudio(audio, text);
   });
+}
+function handleAudio(audio, text) {
+  audioLoader.load(
+    `assets/${audio}-${selectedLang}.ogg`,
+    function (buffer) {
+      console.log(buffer);
+      textHelper.textContent = text[selectedLang];
+      textHelper.style.display = "block";
+      sound.setBuffer(buffer);
+      sound.setLoop(false);
+      sound.setVolume(0.5);
+      sound.play();
+      let delay = buffer.duration * 1000;
+      console.log("delay");
+      console.log(delay);
+      setTimeout(() => {
+        clearText();
+      }, delay);
+    },
+    (xhr) => console.log(xhr),
+    (err) => console.log(err)
+  );
 }
 
 function clearText() {
   textHelper.style.display = "none";
 }
 
+// SPEAKER
+const speaker = document.getElementById("speaker");
+speaker.addEventListener("click", () => {
+  let text = {
+    en: "",
+    hn: "",
+    marathi: "",
+  };
+  handleAudio("13", text);
+});
 /**
  * Animate
  */

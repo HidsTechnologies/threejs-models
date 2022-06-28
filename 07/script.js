@@ -177,33 +177,47 @@ function clickMesh({ mesh, name, audio, text }) {
     }
     clickedItem = name;
     // load a sound and set it as the Audio object's buffer
-    audioLoader.load(
-      `assets/${audio}-${selectedLang}.ogg`,
-      function (buffer) {
-        console.log(buffer);
-        textHelper.textContent = text[selectedLang];
-        textHelper.style.display = "block";
-        sound.setBuffer(buffer);
-        sound.setLoop(false);
-        sound.setVolume(0.5);
-        sound.play();
-        let delay = buffer.duration * 1000;
-        console.log("delay");
-        console.log(delay);
-        setTimeout(() => {
-          clearText();
-        }, delay);
-      },
-      (xhr) => console.log(xhr),
-      (err) => console.log(err)
-    );
+    handleAudio(audio, text);
   });
+}
+function handleAudio(audio, text) {
+  audioLoader.load(
+    `assets/${audio}-${selectedLang}.ogg`,
+    function (buffer) {
+      console.log(buffer);
+      textHelper.textContent = text[selectedLang];
+      textHelper.style.display = "block";
+      sound.setBuffer(buffer);
+      sound.setLoop(false);
+      sound.setVolume(0.5);
+      sound.play();
+      let delay = buffer.duration * 1000;
+      console.log("delay");
+      console.log(delay);
+      setTimeout(() => {
+        clearText();
+      }, delay);
+    },
+    (xhr) => console.log(xhr),
+    (err) => console.log(err)
+  );
 }
 
 function clearText() {
   textHelper.style.display = "none";
 }
 
+// SPEAKER
+const speaker = document.getElementById("speaker");
+speaker.addEventListener("click", () => {
+  let text = {
+    en: "The direct-operated pressure reducing valve is used to reduce the system pressure, the setting is effected by means of a handwheel. Pilot oil supply internal, leakage oil drain external, without nonreturn valve, mounted on component plate.",
+    hn: "सिस्टम के दबाव को कम करने के लिए प्रत्यक्ष-संचालित दबाव कम करने वाले वाल्व का उपयोग किया जाता है, सेटिंग एक हैंडव्हील के माध्यम से प्रभावित होती है। पायलट तेल आपूर्ति आंतरिक, रिसाव तेल नाली बाहरी, गैर-वापसी वाल्व के बिना, घटक प्लेट पर घुड़सवार।",
+    marathi:
+      "सिस्टम प्रेशर कमी करण्यासाठी डायरेक्ट-ऑपरेटेड प्रेशर रिड्यूसिंग व्हॉल्व्हचा वापर केला जातो, सेटिंग हँडव्हीलद्वारे प्रभावित होते. पायलट तेल पुरवठा अंतर्गत, गळती तेल निचरा बाह्य, नॉन-रिटर्न वाल्व्हशिवाय, घटक प्लेटवर आरोहित.",
+  };
+  handleAudio("07", text);
+});
 /**
  * Animate
  */

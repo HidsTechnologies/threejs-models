@@ -175,33 +175,47 @@ function clickMesh({ mesh, name, audio, text }) {
     }
     clickedItem = name;
     // load a sound and set it as the Audio object's buffer
-    audioLoader.load(
-      `assets/${audio}-${selectedLang}.ogg`,
-      function (buffer) {
-        console.log(buffer);
-        textHelper.textContent = text[selectedLang];
-        textHelper.style.display = "block";
-        sound.setBuffer(buffer);
-        sound.setLoop(false);
-        sound.setVolume(0.5);
-        sound.play();
-        let delay = buffer.duration * 1000;
-        console.log("delay");
-        console.log(delay);
-        setTimeout(() => {
-          clearText();
-        }, delay);
-      },
-      (xhr) => console.log(xhr),
-      (err) => console.log(err)
-    );
+    handleAudio(audio, text);
   });
+}
+function handleAudio(audio, text) {
+  audioLoader.load(
+    `assets/${audio}-${selectedLang}.ogg`,
+    function (buffer) {
+      console.log(buffer);
+      textHelper.textContent = text[selectedLang];
+      textHelper.style.display = "block";
+      sound.setBuffer(buffer);
+      sound.setLoop(false);
+      sound.setVolume(0.5);
+      sound.play();
+      let delay = buffer.duration * 1000;
+      console.log("delay");
+      console.log(delay);
+      setTimeout(() => {
+        clearText();
+      }, delay);
+    },
+    (xhr) => console.log(xhr),
+    (err) => console.log(err)
+  );
 }
 
 function clearText() {
   textHelper.style.display = "none";
 }
 
+// SPEAKER
+const speaker = document.getElementById("speaker");
+speaker.addEventListener("click", () => {
+  let text = {
+    en: "Directional control spool valve; 4 connections; 2 switching positions; electrical operation; spring return; concealed auxiliary control; control spool directly operated; control spool type 'C'",
+    hn: "दिशात्मक नियंत्रण स्पूल वाल्व; 4 कनेक्शन; 2 स्विचिंग स्थिति; विद्युत संचालन; वसंत वापसी; छुपा सहायक नियंत्रण; नियंत्रण स्पूल सीधे संचालित; नियंत्रण स्पूल प्रकार 'सी'",
+    marathi:
+      "दिशात्मक नियंत्रण स्पूल वाल्व; 4 कनेक्शन; 2 स्विचिंग पोझिशन्स; विद्युत ऑपरेशन; वसंत ऋतु परतावा; गुप्त सहाय्यक नियंत्रण; नियंत्रण स्पूल थेट ऑपरेट; कंट्रोल स्पूल प्रकार 'सी'",
+  };
+  handleAudio("05", text);
+});
 /**
  * Animate
  */

@@ -175,32 +175,45 @@ function clickMesh({ mesh, name, audio, text }) {
     }
     clickedItem = name;
     // load a sound and set it as the Audio object's buffer
-    audioLoader.load(
-      `assets/${audio}-${selectedLang}.ogg`,
-      function (buffer) {
-        console.log(buffer);
-        textHelper.textContent = text[selectedLang];
-        textHelper.style.display = "block";
-        sound.setBuffer(buffer);
-        sound.setLoop(false);
-        sound.setVolume(0.5);
-        sound.play();
-        let delay = buffer.duration * 1000;
-        console.log("delay");
-        console.log(delay);
-        setTimeout(() => {
-          clearText();
-        }, delay);
-      },
-      (xhr) => console.log(xhr),
-      (err) => console.log(err)
-    );
+    handleAudio(audio, text);
   });
 }
 
+function handleAudio(audio, text) {
+  audioLoader.load(
+    `assets/${audio}-${selectedLang}.ogg`,
+    function (buffer) {
+      console.log(buffer);
+      textHelper.textContent = text[selectedLang];
+      textHelper.style.display = "block";
+      sound.setBuffer(buffer);
+      sound.setLoop(false);
+      sound.setVolume(0.5);
+      sound.play();
+      let delay = buffer.duration * 1000;
+      setTimeout(() => {
+        clearText();
+      }, delay);
+    },
+    (xhr) => console.log(xhr),
+    (err) => console.log(err)
+  );
+}
 function clearText() {
   textHelper.style.display = "none";
 }
+
+// SPEAKER
+const speaker = document.getElementById("speaker");
+speaker.addEventListener("click", () => {
+  let text = {
+    en: "The pilot-operated pressure relief valve is used to limit the system pressure, the setting is effected by means of a handwheel.",
+    hn: "पायलट द्वारा संचालित दबाव राहत वाल्व का उपयोग सिस्टम के दबाव को सीमित करने के लिए किया जाता है, सेटिंग एक हैंडव्हील के माध्यम से प्रभावित होती है।",
+    marathi:
+      "पायलट-ऑपरेटेड प्रेशर रिलीफ व्हॉल्व्हचा वापर सिस्टम प्रेशर मर्यादित करण्यासाठी केला जातो, सेटिंग हँडव्हीलद्वारे प्रभावित होते.",
+  };
+  handleAudio("03", text);
+});
 
 /**
  * Animate
